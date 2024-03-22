@@ -1,0 +1,24 @@
+extends ../includes/auth.pug
+
+block authContent
+  form(action="/auth/handle-account-settings", method="POST")
+    h3 Account Settings 
+    .form-section 
+      input(type="text", placeholder="type old username", name="oldAlias")
+      input(type="password", placeholder="type old password", name="oldPassword")
+    .form-section 
+      .checkbox 
+        .check-button 
+          input(type="checkbox", value="ok", name="changeName", onclick="details(this)")
+        label(for="changeName") Change Name
+      div(style="display: none")
+        input(type="text", placeholder="type new name", name="newAlias")
+    .form-section 
+      .checkbox 
+        .check-button 
+          input(type="checkbox", value="ok", name="changePassword", onclick="details(this)")
+        label(for="changePassword") Change Password
+      div(style="display: none")
+        input(type="password", placeholder="type new password", name="newPassword")
+        input(type="password", placeholder="confirm new password", name="confirmPassword")
+    button(type="submit") CHANGE

@@ -1,0 +1,10 @@
+extends ../includes/header.pug
+
+block styles
+    link(rel="stylesheet", href="/css/auth-style.css")
+
+block content
+  .container
+    if error 
+      .user-message.danger= error
+    block authContent

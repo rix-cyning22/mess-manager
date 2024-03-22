@@ -1,0 +1,5 @@
+TO DO 
+
+8. make footfall asynchronous
+9. a verification technique
+10. add a payment mechanism

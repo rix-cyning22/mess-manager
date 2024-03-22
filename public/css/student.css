@@ -1,0 +1,82 @@
+.quantity-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: fit-content;
+}
+  
+.quantity-control {
+    background-color: #001f3f;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+}
+  
+.quantity-input {
+    text-align: center;
+    border: none;
+    outline: none;
+    width: 40px;
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-top: 2px solid gray;
+    padding-top: 5px;
+}
+
+.total * {
+    width: 25%;
+    text-align: center;
+    font-size: 18px;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+    padding: 5%;
+    border: 2px solid #555;
+    align-items: center;
+}
+
+.feedback-form button {
+    background-color: #222;
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    width: fit-content;
+}
+
+.button-row { 
+    justify-content: center; 
+    margin-top: 10px;
+    display: flex;
+}
+
+.items { 
+    color: gray;
+    justify-content: right;
+    margin: 10px 20px;
+}
+
+.secondary { 
+    color: #222; 
+    border: 2px solid #222;
+    background-color: #999; 
+}
+.secondary:hover { 
+    background-color: #222;
+    color: white;
+    border: 2px solid #222;
+}
+
+.feedback-form *{ margin: 20px; }
+.feedback-form textarea { width: 100%; }
+.items span:first-child{font-style: italic;}

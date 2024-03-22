@@ -1,0 +1,14 @@
+extends ../includes/header.pug
+
+block styles 
+    link(rel='stylesheet', href='/css/student.css')
+
+block content 
+    .container
+        h3 Feedback for #{date}
+        form(action="/post-feedback", method="POST").feedback-form
+            input(type="hidden", name="date", value=date)
+            textarea(placeholder="For Breakfast", name="breakfast", value=breakfast)#breakfast
+            textarea(placeholder="For Lunch", name="lunch", value=lunch)#lunch 
+            textarea(placeholder="For Dinner", name="dinner", value=dinner)#dinner
+            button(type="submit") Post

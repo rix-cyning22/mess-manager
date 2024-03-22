@@ -1,0 +1,27 @@
+extends ../includes/header.pug 
+
+block styles 
+    link(rel='stylesheet', href='/css/admin.css')
+
+block content
+    .container
+        h1= footfalls.date
+        p Money today: #{footfalls.total}
+        .details-content
+            table 
+                thead 
+                    td Meal 
+                    td Footfall 
+                    td Money Collected 
+                tr 
+                    td Breakfast 
+                    td= footfalls.breakfast.footfall
+                    td= footfalls.breakfast.money 
+                tr 
+                    td Lunch 
+                    td= footfalls.lunch.footfall 
+                    td= footfalls.lunch.money 
+                tr 
+                    td Dinner 
+                    td= footfalls.dinner.footfall 
+                    td= footfalls.dinner.money

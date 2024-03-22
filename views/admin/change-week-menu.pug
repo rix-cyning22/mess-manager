@@ -1,0 +1,28 @@
+extends ../includes/header.pug
+
+block styles 
+    link(rel='stylesheet', href='/css/admin.css')
+
+block content 
+    .container
+        each dayMenu in menu
+            .post.day-menu(id=dayMenu.day)
+                p(onclick="collapse(this)") #{dayMenu.day} &#9660;
+                div(id=dayMenu.day+"-collapsible").collapsed.subcontainer.justify
+                    each time in ["breakfast", "lunch", "dinner"]
+                        .post.meal-details
+                            h3= time
+                            div(id=dayMenu.day+"-"+time).itembox 
+                                each item in dayMenu[time]
+                                    .item-row
+                                        p.name
+                                            b= item.name 
+                                        p
+                                            code.price= item.price 
+                                        button(onclick="deleteItem(this)") Remove
+                            .item-input
+                                input(type="text", id=dayMenu.day+"-"+time+"-name", placeholder="enter item name")
+                                input(type="number", pattern="[0-9]*", id=dayMenu.day+"-"+time+"-price", placeholder="enter item price")
+                                button(onclick="addItem('"+dayMenu.day+"-"+time+"')") Add
+                    button(onclick="postMenuChanges(this)") Submit Changes
+    script(type="text/javascript", src="/js/menu-settings.js")

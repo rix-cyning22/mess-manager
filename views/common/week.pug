@@ -1,0 +1,46 @@
+extends ../includes/header.pug 
+
+block styles 
+    if userType == "admin"
+        link(rel="stylesheet", href="/css/admin.css")
+    if userType == "student"
+        link(rel="stylesheet", href="/css/student.css")
+
+block content 
+    .container 
+        if userType == "admin"
+            .post-action.post-meta
+                a(href="/admin/change-menu") Change
+        each day in week
+            .post
+                .post-action
+                    h2= day.day 
+                    select(onchange="displayMenuTable(this)").meal-dropdown
+                        option(value="breakfast") Breakfast
+                        option(value="lunch") Lunch
+                        option(value="dinner") Dinner
+                table.details-content#breakfast-table
+                    thead 
+                        td Item 
+                        td Price 
+                    each item in day.breakfast
+                        tr
+                            td= item.name 
+                            td= item.price 
+                table(style="display: none;").details-content#lunch-table
+                    thead 
+                        td Item 
+                        td Price 
+                    each item in day.lunch
+                        tr
+                            td= item.name 
+                            td= item.price 
+                table(style="display: none;").details-content#dinner-table
+                    thead 
+                        td Item 
+                        td Price 
+                    each item in day.dinner
+                        tr
+                            td= item.name 
+                            td= item.price 
+    script(src="/js/menu-settings.js", type="text/javascript")

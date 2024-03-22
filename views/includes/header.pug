@@ -1,0 +1,66 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title MessManager: #{pageTitle}
+    link(rel="stylesheet", href="/css/main.css")
+    link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap", rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto&display=swap", rel="stylesheet")
+
+    block styles
+    body
+        .header 
+            .navbar
+                h1 Mess Manager
+            if userType == "admin"
+                .subnav
+                    .subnav-item-container
+                        .subnav-item
+                            a(href='/admin/week') This Week
+                        .subnav-item
+                            a(href='/admin/') Today
+                        .subnav-item
+                            a(href='/admin/announcements') Announcements
+                        .subnav-item
+                            a(href='/admin/history') History
+                    .subnav-item-container
+                        .subnav-item#dropdown-header
+                            a(href="#")= username
+                #subnav-dropdown(style="display: none;")
+                    .subnav-item 
+                        a(href="/auth/account-settings") Account Settings
+                    .subnav-item
+                        a(href='/auth/logout') Logout
+            else if userType == "student"
+                .subnav
+                    .subnav-item-container
+                        .subnav-item
+                            a(href='/week') This Week
+                        .subnav-item
+                            a(href='/') Today
+                        .subnav-item
+                            a(href='/announcements') Announcements
+                        .subnav-item
+                            a(href='/history') History
+                    .subnav-item-container
+                        .subnav-item#dropdown-header
+                            a(href="#")= username
+                #subnav-dropdown(style="display: none;")
+                    .subnav-item 
+                        a(href="/auth/account-settings") Account Settings
+                    .subnav-item
+                        a(href='/auth/logout') Logout
+            else 
+                .subnav
+                        .subnav-item-container .
+                        .subnav-item-container
+                            .subnav-item
+                                a(href='/auth/login') Login 
+                            .subnav-item  
+                                a(href="/auth/signup") Sign up
+            
+            block heading  
+
+        block content
+        script(type="text/javascript", src="/js/index.js")

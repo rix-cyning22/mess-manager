@@ -1,0 +1,9 @@
+extends ../includes/auth.pug
+
+block authContent
+    form(action="/auth/handle-login", method="POST")
+      input(type="text", placeholder="User ID", name="userId")
+      input(type="password", placeholder="password", name="password")
+      button(type="submit") Login
+      p New Member? 
+        a(href="/auth/signup") Sign up!

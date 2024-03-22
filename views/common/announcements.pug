@@ -1,0 +1,20 @@
+extends ../includes/user.pug
+
+block content
+    .container#post-container
+        each announcement in announcements 
+            .post 
+                .post-action.post-meta#post-meta
+                    p= announcement.posterName
+                    p#post-timestamp= announcement.timestamp 
+                    if announcement.edittedAt
+                        p#editted (editted at #{announcement.edittedAt})
+                p#post-content= announcement.description 
+                if announcement.posterId == userId & userType == "admin"
+                    .post-action.post-meta
+                        button(onclick="editAnnouncement(this)") EDIT
+    if userType == "admin"
+        form.announcement-text
+            textarea
+            button POST
+        script(src="/js/interactions.js", type="text/javascript")

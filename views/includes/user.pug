@@ -1,0 +1,9 @@
+extends ../includes/header.pug
+
+block styles        
+    if userType == "student"
+        link(rel='stylesheet', href='/css/student.css')
+    else if userType == "admin"
+        link(rel="stylesheet", href="/css/admin.css")
+
+block content 

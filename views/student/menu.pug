@@ -1,0 +1,75 @@
+extends ../includes/header.pug 
+
+block styles         
+    link(rel='stylesheet', href='/css/student.css')
+
+block content
+    .container
+        if error   
+            .user-message.danger= error
+        h2 #{date} (#{dayOfWeek}) #{lastOrdered}
+        if lastOrdered == date
+            p You have already ordered 
+        else
+            input(type="hidden", value=date, readonly, id="date-today")
+            .post
+                h3 Breakfast: 
+                table#breakfast 
+                    thead 
+                        td Item 
+                        td Price 
+                        td 
+                        td Total Price
+                    each food in menu.breakfast 
+                        tr
+                            td= food.name
+                            td(id= food.name + "-breakfast-price")= food.price
+                            td
+                                .quantity-container
+                                    .quantity-control(onclick="decreaseQuantity('" + food.name + "-breakfast')") -
+                                    input.quantity-input(type='text', id=food.name + "-breakfast", value='0', min='0', readonly)
+                                    .quantity-control(onclick="increaseQuantity('" + food.name + "-breakfast')") +
+                            td.name-field(id= food.name + "-breakfast-amt") 0
+            .post
+                h3 Lunch: 
+                table#lunch
+                    thead 
+                        td Item 
+                        td Price 
+                        td 
+                        td Total Price
+                    each food in menu.lunch
+                        tr
+                            td= food.name
+                            td(id= food.name + "-lunch-price")= food.price
+                            td
+                                .quantity-container
+                                    .quantity-control(onclick="decreaseQuantity('" + food.name + "-lunch')") -
+                                    input.quantity-input(type='text', id=food.name + "-lunch", value='0', min='0', readonly)
+                                    .quantity-control(onclick="increaseQuantity('" + food.name + "-lunch')") +
+                            td.name-field(id= food.name + "-lunch-amt") 0
+            .post
+                h3 Dinner: 
+                table#dinner
+                    thead 
+                        td Item 
+                        td Price 
+                        td 
+                        td Total Price 
+                    each food in menu.dinner
+                        tr
+                            td= food.name
+                            td(id= food.name + "-dinner-price")= food.price
+                            td
+                                .quantity-container
+                                    .quantity-control(onclick="decreaseQuantity('" + food.name + "-dinner')") -
+                                    input.quantity-input(type='text', id=food.name + "-dinner", value='0', min='0', readonly)
+                                    .quantity-control(onclick="increaseQuantity('" + food.name + "-dinner')") +
+                            td.name-field(id= food.name + "-dinner-amt") 0
+            p.total 
+                b Today's amount:
+                b#tot-amt 0
+            .button-row
+                button(type="submit")#submit-order CONFIRM
+                
+    script(src='js/menu.js', type="text/javascript")

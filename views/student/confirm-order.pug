@@ -1,0 +1,39 @@
+extends ../includes/header.pug 
+
+block styles         
+    link(rel='stylesheet', href='/css/student.css')
+
+block content
+    .container
+      .post
+        h3 Breakfast
+        if menu.breakfast.length > 0 
+          each item in menu.breakfast
+            p.items
+              span= item.name
+              span : #{item.qty} x #{item.price} = #{item.qty * item.price}  
+        else 
+          p.items None
+      .post 
+        h3 Lunch 
+        if menu.lunch.length > 0 
+          each item in menu.lunch 
+            p.items
+              span= item.name
+              span : #{item.qty} x #{item.price} = #{item.qty * item.price}  
+        else 
+          p.items None
+      .post
+        h3 Dinner 
+        if menu.dinner.length > 0 
+          each item in menu.dinner
+            p.items
+              span= item.name
+              span : #{item.qty} x #{item.price} = #{item.qty * item.price} 
+        else 
+          p.items None
+      .button-row.post-action   
+        button.secondary(onclick="confirmation(this)")#go-back GO BACK  
+        button(onclick="confirmation(this)")#confirm-order CONFIRM
+            
+    script(src='/js/menu.js', type="text/javascript")

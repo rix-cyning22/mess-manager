@@ -1,0 +1,102 @@
+extends ../includes/header.pug
+
+block styles  
+    if userType === "student"       
+        link(rel='stylesheet', href='/css/student.css')
+    else if userType === "admin"
+        link(rel="stylesheet", href="/css/admin.css")
+
+block heading 
+    .heading 
+        .heading-row
+            if userType == "student"
+                | Total Spent: 
+            else
+                | Total Collected:  
+            .total-value= total
+        .heading-row
+            if userType == "admin"
+                a(href="/admin/generate-sheet") Generate Data Sheet 
+                a(href="/reset-paid-date") Reset The Last Paid Date
+            else if userType == "student"
+                a(href="/generate-sheet") Generate Data Sheet
+
+block content 
+    .container
+        if error 
+            .user-message.danger= error
+        if userType === "student"
+            each day in records
+                .post
+                    .post-details
+                        .post-date= day.date 
+                        .post-info Spent: #{day.total} 
+                        .post-action
+                            a(href="/view-feedback?day="+day.date) View Feedback
+                            a(href="#" onclick="details(this)") Details
+                    .details-content(style="display: none")
+                        .meal-details
+                            p 
+                                b At Breakfast,
+                                table 
+                                    thead 
+                                        td Item 
+                                        td Quantity 
+                                        td Money Spent on Item 
+                                    each item in day.breakfast 
+                                        tr
+                                            td= item.name
+                                            td= item.qty
+                                            td= item.tot 
+                            p 
+                                b At Lunch,
+                                table 
+                                    thead 
+                                        td Item 
+                                        td Quantity 
+                                        td Money Spent on Item 
+                                    each item in day.lunch 
+                                        tr
+                                            td= item.name
+                                            td= item.qty
+                                            td= item.tot 
+                            p 
+                                b At Dinner,
+                                table 
+                                    thead 
+                                        td Item 
+                                        td Quantity 
+                                        td Money Spent on Item  
+                                    each item in day.dinner
+                                        tr 
+                                            td= item.name
+                                            td= item.qty
+                                            td= item.tot 
+
+        else if userType === "admin"
+            each day in records 
+                .post
+                    .post-details
+                        .post-date= day.date
+                        .post-info Amount Collected: #{day.breakfast.money + day.lunch.money + day.dinner.money}
+                        .post-action
+                            a(href="/admin/feedback?day="+day.date) View Feedback
+                            a(href="#" onclick="details(this)") See Breakdown
+                    .details-content(style="display: none")
+                        table 
+                            thead 
+                                td Meal 
+                                td Footfall 
+                                td Money Collected 
+                            tr 
+                                td Breakfast 
+                                td= day.breakfast.footfall 
+                                td= day.breakfast.money 
+                            tr 
+                                td Lunch 
+                                td= day.lunch.footfall 
+                                td= day.lunch.money 
+                            tr 
+                                td Dinner 
+                                td= day.dinner.footfall 
+                                td= day.dinner.money

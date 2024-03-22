@@ -1,0 +1,26 @@
+extends ../includes/header.pug 
+
+block heading 
+    .heading
+        if userType === "student"
+            .heading-row
+                a(href="/write-feedback?day=" + date) Write Feedback 
+
+block content 
+    .container
+        h2 Student feedbacks on #{date}
+        .subcontainer
+            each feedback in feedbacks
+                .post 
+                    p 
+                        b Breakfast: 
+                        | #{feedback.breakfast}
+                    p
+                        b Lunch 
+                        | #{feedback.lunch}
+                    p
+                        b Dinner 
+                        | #{feedback.dinner}
+                    .post-action.post-meta
+                        p= feedback.alias
+                        p= feedback.timestamp 
